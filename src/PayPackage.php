@@ -20,13 +20,16 @@ class PayPackage implements RegistrationInterface, RouterConfigInterface
      */
     public function addToContainer(Container $c)
     {
+        $payConfig = $c->get('bone-pay');
+        $paymentService = new PaymentService($payConfig);
+        $c[PaymentService::class] = $paymentService;
+
         /** @var ViewEngine $viewEngine */
         $viewEngine = $c->get(ViewEngine::class);
         $viewEngine->addFolder('pay', __DIR__ . '/View/Pay/');
 
         $c[PayController::class] = $c->factory(function (Container $c) {
-            $payConfig = $c->get('bone-pay');
-            $paymentService = new PaymentService($payConfig);
+            $paymentService = $c->get(PaymentService::class);
 
             return Init::controller(new PayController($paymentService), $c);
         });
