@@ -1,5 +1,5 @@
-# pay
-Pay package for Bone Mvc Framework
+# bone-pay
+Payment gateway package for Bone Framework
 ## installation
 Use Composer
 ```
@@ -19,5 +19,17 @@ return [
         PayPackage::class,
     ],
     // ...
+];
+```
+Configure your payment adapters in `config/bone-pay.php`
+```php
+return [
+    'bone-pay' => [
+        'adapters' => [
+            'Paypal' => [
+                
+            ],
+        ],
+    ],
 ];
 ```

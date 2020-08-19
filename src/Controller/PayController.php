@@ -3,12 +3,25 @@
 namespace Bone\Pay\Controller;
 
 use Bone\Controller\Controller;
+use Bone\Pay\Service\PaymentService;
 use Laminas\Diactoros\Response\HtmlResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 class PayController extends Controller
 {
+    /** @var PaymentService */
+    private $paymentService;
+
+    /**
+     * PayController constructor.
+     * @param PaymentService $paymentService
+     */
+    public function __construct(PaymentService $paymentService)
+    {
+        $this->paymentService = $paymentService;
+    }
+
     /**
      * @param ServerRequestInterface $request
      * @param array $args
